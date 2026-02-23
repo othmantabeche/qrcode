@@ -1,16 +1,24 @@
 {
+  "version": 2,
   "buildCommand": "npm run setup && npm run build",
-  "outputDirectory": "build/client",
-  "framework": null,
-  "rewrites": [
+  "builds": [
     {
-      "source": "/(.*)",
-      "destination": "/api/index"
+      "src": "server.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "build/client/**",
+      "use": "@vercel/static"
     }
   ],
-  "functions": {
-    "api/index.js": {
-      "runtime": "nodejs20.x"
+  "routes": [
+    {
+      "src": "/assets/(.*)",
+      "dest": "/build/client/assets/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/server.js"
     }
-  }
+  ]
 }
