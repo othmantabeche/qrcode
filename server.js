@@ -12,7 +12,13 @@ app.use(express.static("build/client", { immutable: true, maxAge: "1y" }));
 // Handle all requests with React Router
 app.all("*", createRequestHandler({ build }));
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Express server listening on port ${port}`);
-});
+// For local development
+if (process.env.NODE_ENV !== "production") {
+  const port = process.env.PORT || 3000;
+  app.listen(port, () => {
+    console.log(`Express server listening on port ${port}`);
+  });
+}
+
+// Export for Vercel serverless
+export default app;
