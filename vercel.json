@@ -1,4 +1,9 @@
 {
   "buildCommand": "npm run setup && npm run build",
-  "framework": null
+  "framework": null,
+  "functions": {
+    "build/server/**/*.js": {
+      "runtime": "nodejs20.x"
+    }
+  }
 }
